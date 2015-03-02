@@ -1,22 +1,15 @@
 /*
-
 Line Follower utilizing a PID algorithm
 Written 2/28/15 by Walter Coe, BYU Mechatronics Club
 A great explanation of PID can be found here...
 http://www.pc-control.co.uk/feedback_control.htm
-
-
  - -----------> +
-
 |-|     s      |-|
 | |------------| |
 |-|    |||     |-|
        |||
        |||
-
-
   Assumptions for using this code....
-
   Using one photo-transistor sensor (i.e. QRD1114 or similar)
   The sensor will need to be tuned, by choosing the pull-up resistor
     A bigger resistor will make for a faster transition between 0-5v output, but will result in a narrow detection range
@@ -29,13 +22,8 @@ http://www.pc-control.co.uk/feedback_control.htm
   2) Connect power (can be done with a switch)
   3) Arduino will wait 2 seconds before starting to follow the line
   4) If the Arduino moves to fast to react to the line, you can slow the speed by lowering the motor_avg value
-
-
-
 sensor reads light (higher value output from 'pos' equation) when it needs to turn left
 sensor reads dark (lower value output from 'pos' equation) where it needs to turn right
-
-
 */
 
 //Define Sensor Pins
@@ -146,7 +134,7 @@ void loop()
       
       //To far left when negative
       //To far right when positive
-      differentiator = (2*tau - Ts)/(2*tau+Ts)*differentiator + (2/(2*tau+Ts))*(error_d1 - error);
+      differentiator = (2*tau - Ts)/(2*tau+Ts)*differentiator + (2/(2*tau+Ts))*(posError_d1 - posError);
       
         
       //If Integrating is safe      
