@@ -22,6 +22,18 @@ Explanation for use of this code...
 	time how long the follower has seen the line with a given sensor. If the follower sees the line 
 	for too long, then add speed to one wheel and stop the other to make a tighter turn.
 	
+	
+	BOM...
+	(1) Arduino w/ 9v Battery
+	(2) qd1114 IR transceiver (or similar)
+	(2) 200-400 ohm current limiting resistors for the IR leds (see above)
+	(4) 1K - 10K pull-up resistors (IR-Arduino and MOFET-gate)
+	(2) Motors + Wheel assemblies
+	(2) MOFET like (like FQP30N06L, or similar)
+
+	
+	
+	
 */
 
 //Define Sensor Pins
