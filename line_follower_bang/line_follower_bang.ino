@@ -10,9 +10,12 @@ This code is written for Arduino
 Explanation for use of this code...
 
     Use two sensors positioned so that they straddle the line to be followed
-    The assumed sensor is a photo-transistor sensor (i.e. QRD1114 or similar)
+    The assumed sensor is a photo-transistor sensor (i.e. QRD1114 or similar), which closes a transistor when light is seen (white = no-line).
     There must be a threshold determined by the user, i.e. the value of variable 's_thresh'
-    Builder must verify that the sensor threshold is not met by both sensors simultaneously
+    Builder must verify that the sensor threshold is not met by both sensors simultaneously.
+	
+	Note: This code also assumes that the sensor input is pulled-high. When the line is seen, the input channel
+	is driven low by the sensor. Thus detecting a line is detecting when the channel is low.
 
 
 	An easy and useful addition to this code would include 'motor_high' and 'motor_stop' variables and
@@ -24,8 +27,8 @@ Explanation for use of this code...
 //Define Sensor Pins
 //A0 is on the left
 //A1 is on the right
-const int s0 = A0;
-const int s1 = A1;
+const int sL = A0;
+const int sR = A1;
 
 
 //Motor Constraints
@@ -64,6 +67,10 @@ void setup()
   pinMode(motor_L, OUTPUT);
   pinMode(motor_R, OUTPUT);
 
+  //Setup the pins that will read sensors
+  pinMode(sL, INPUT);
+  pinMode(sR, INPUT);
+  
  //Initialize
   turn = 0;
   
@@ -74,7 +81,7 @@ void setup()
 void loop()
 {
   //Check for the line
-	turn = line_check(s0, s1);
+	turn = line_check(sL, sR);
   
   //Based on sensor reading, turn or go straight
 	drive_motor(turn, motor_L, motor_R, motor_low, motor_avg);
@@ -97,17 +104,17 @@ void loop()
 
 //----------------------------------------------------------------------------------------------------------------------------
 
-int line_check(int s0, int s1)
+int line_check(int sL, int sR)
 {
    
-  //Line seen by left sensor
-   if(analogRead(s0) <= s_thresh)
+  //Line seen by left sensor, pulled-down when seen
+   if(analogRead(sL) <= s_thresh)
    {
      return(0); 
    }
    
-   //Line seen by right sensor
-   else if(analogRead(s1) <= s_thresh)
+   //Line seen by right sensor, pulled-down when seen
+   else if(analogRead(sR) <= s_thresh)
    {
      return(1);
    }
