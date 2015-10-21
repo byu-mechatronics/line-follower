@@ -120,13 +120,13 @@ int line_check(int sL, int sR)
 {
    
   //Line seen by left sensor, pulled-down when seen
-   if(analogRead(sL) <= s_thresh)
+   if((analogRead(sL)/1023.0) <= s_thresh)
    {
      return(0); 
    }
    
    //Line seen by right sensor, pulled-down when seen
-   else if(analogRead(sR) <= s_thresh)
+   else if((analogRead(sR)/1023.0) <= s_thresh)
    {
      return(1);
    }
