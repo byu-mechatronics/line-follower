@@ -26,10 +26,11 @@ Explanation for use of this code...
 	BOM...
 	(1) Arduino w/ 9v Battery
 	(2) qd1114 IR transceiver (or similar)
-	(2) 200-400 ohm current limiting resistors for the IR leds (see above)
-	(4) 1K - 10K pull-up resistors (IR-Arduino and MOFET-gate)
-	(2) Motors + Wheel assemblies
+	(2) 200-400 ohm current limiting resistor for the IR leds (see above)
+	(4) 1K - 10K pull-up resistor (IR-Arduino and MOFET-gate)
+	(2) Motor + Wheel assemblies
 	(2) MOFET like (like FQP30N06L, or similar)
+        (2) Flyback diode
 
 	
 	
